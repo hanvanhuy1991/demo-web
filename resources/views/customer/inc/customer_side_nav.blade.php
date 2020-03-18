@@ -6,7 +6,7 @@
                 <a href="#homeSubmenu" >Dashboard</a>
             </li>
             <li>
-                <a href="#">Đăng Ký</a>
+                <a href="{{ route('customer.register') }}">Đăng Ký</a>
             </li>
             <li>
                 <a href="{{ route('customer.profile') }}">Thông tin cá nhân</a>

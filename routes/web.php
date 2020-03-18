@@ -25,4 +25,7 @@ Route::group(['middleware' => ['customer', 'verified']], function (){
     Route::get('home', 'HomeController@index')->name('home');
     Route::get('profile', 'ProfileController@index')->name('customer.profile');
     Route::post('profile/update', 'ProfileController@update')->name('customer.profile.update');
+
+    Route::get('customer-register', 'CustomerController@index')->name('customer.register');
+    Route::post('customer-register/store', 'CustomerController@store')->name('customer.register.store');
 });

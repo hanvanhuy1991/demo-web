@@ -2,47 +2,61 @@
 
 namespace App\Http\Controllers;
 
-use App\Area;
 use App\Bank;
 use App\Identity;
 use App\User;
-use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class ProfileController extends Controller
+class CustomerController extends Controller
 {
     public function index()
     {
-        $user = User::where('id', Auth::user()->id)
-            ->with([
-                'area', 'bank', 'identity'
-            ])->first();
         $banks = Bank::all();
-        return view('customer.profile', compact('user', 'banks'));
+        return view('customer.register', compact('banks'));
     }
 
-    public function update(Request $request)
+    public function store(Request $request)
     {
-        $validation = $request->validate([
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required|confirmed|min:6',
+            'name' => 'required|max:255',
+            'identity_date' => 'required|max:255',
+            'area' => 'required',
+            'birthday' => 'required',
+            'bank' => 'required',
+            'master_name' => 'required',
+            'identity_number' => 'required',
+            'identity_address' => 'required',
+            'address' => 'required|max:255',
+            'phone' => 'required',
+            'bank_number' => 'required',
+            'brand_name' => 'required',
             'image' => 'mimes:jpeg,jpg,png,gif',
             'image_before' => 'mimes:jpeg,jpg,png,gif',
             'image_after' => 'mimes:jpeg,jpg,png,gif',
         ]);
 
-        $validator = Validator::make($request->all(), $validation);
-        if ($validator->fails())
-        {
-            return response()->json(['error' => $validator->errors()->getMessage()]);
-        }
-        else{
-            $user = Auth::user();
+        if ($validator->fails()) {
+            return redirect()
+                ->route('customer.register')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $user = new User();
 
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->user_type = 1;
+            $user->parent_id = Auth::user()->id;
             $user->bank_id = $request->bank;
             $user->area_id = $request->area;
             $user->birthday = $request->birthday;
+            dd($request->birthday);
             $user->address = $request->address;
             $user->phone = $request->phone;
             $user->bank_number = $request->bank_number;
@@ -55,8 +69,9 @@ class ProfileController extends Controller
 
             if ($user->save())
             {
-                $identity = Identity::where('user_id', $user->id)->first();
-
+                dd($user->id);
+                $identity = new Identity();
+                $identity->user_id = $user->id;
                 $identity->number = $request->identity_number;
                 $identity->date = $request->identity_date;
                 $identity->address = $request->identity_address;
@@ -67,11 +82,8 @@ class ProfileController extends Controller
                 if ($request->hasFile('image_after')) {
                     $identity->image_after = $request->file('image_after')->store('upload', 'public');
                 }
-
-                $identity->save();
-
-                return redirect()->route('customer.profile');
             }
         }
+
     }
 }
