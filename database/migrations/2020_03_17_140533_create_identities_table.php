@@ -15,11 +15,12 @@ class CreateIdentitiesTable extends Migration
     {
         Schema::create('identities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('number');
-            $table->string('date');
-            $table->string('address');
-            $table->string('image_before');
-            $table->string('image_after');
+            $table->bigInteger('user_id');
+            $table->string('number')->nullable();
+            $table->dateTime('date')->nullable();
+            $table->string('address')->nullable();
+            $table->string('image_before')->nullable();
+            $table->string('image_after')->nullable();
             $table->timestamps();
         });
     }

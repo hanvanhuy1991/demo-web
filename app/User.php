@@ -39,16 +39,16 @@ class User extends Authenticatable
 
     public function area()
     {
-        return $this->hasOne(Area::class, 'area_id', 'id');
+        return $this->hasOne(Area::class, 'id', 'area_id');
     }
 
     public function bank()
     {
-        return $this->hasMany(Bank::class, 'bank_id', 'id');
+        return $this->hasOne(Bank::class, 'id', 'bank_id');
     }
 
-    public function identities ()
+    public function identity ()
     {
-        return $this->hasOne(Identity::class, 'identity_id', 'id');
+        return $this->hasOne(Identity::class, 'user_id', 'id');
     }
 }

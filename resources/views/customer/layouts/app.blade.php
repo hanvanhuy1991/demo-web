@@ -24,6 +24,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ asset('customer/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('customer/css/custom.css') }}">
 </head>
 <body>
     <div id="app">
@@ -79,19 +80,16 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="wrapper d-flex align-items-stretch">
+                @yield('content')
+            </div>
         </main>
     </div>
 
     <script src="{{ asset('customer/js/jquery.min.js') }}"></script>
     <script src="{{ asset('customer/js/popper.js') }}"></script>
     <script src="{{ asset('customer/js/main.js') }}"></script>
-    <script !src="">
-        $(document).ready(function () {
-            "
-            $(;)
-        })
-    </script>
+    @yield('script')
 </body>
 
 </html>

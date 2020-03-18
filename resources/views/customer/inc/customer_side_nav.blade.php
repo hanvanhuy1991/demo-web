@@ -9,7 +9,7 @@
                 <a href="#">Đăng Ký</a>
             </li>
             <li>
-                <a href="#pageSubmenu">Thông tin cá nhân</a>
+                <a href="{{ route('customer.profile') }}">Thông tin cá nhân</a>
             </li>
             <li>
                 <a href="#">Portfolio</a>
