@@ -24,16 +24,16 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $validation = $request->validate([
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'image' => 'mimes:jpeg,jpg,png,gif',
             'image_before' => 'mimes:jpeg,jpg,png,gif',
             'image_after' => 'mimes:jpeg,jpg,png,gif',
         ]);
-
-        $validator = Validator::make($request->all(), $validation);
-        if ($validator->fails())
-        {
-            return response()->json(['error' => $validator->errors()->getMessage()]);
+        if ($validator->fails()) {
+            return redirect()
+                ->route('customer.profile')
+                ->withErrors($validator)
+                ->withInput();
         }
         else{
             $user = Auth::user();
@@ -42,7 +42,8 @@ class ProfileController extends Controller
             $user->email = $request->email;
             $user->bank_id = $request->bank;
             $user->area_id = $request->area;
-            $user->birthday = $request->birthday;
+            $date = strtotime($request->birthday);
+            $user->birthday = date('Y/m/d H:i:s', $date);
             $user->address = $request->address;
             $user->phone = $request->phone;
             $user->bank_number = $request->bank_number;
@@ -58,7 +59,7 @@ class ProfileController extends Controller
                 $identity = Identity::where('user_id', $user->id)->first();
 
                 $identity->number = $request->identity_number;
-                $identity->date = $request->identity_date;
+                $identity->date = date('Y/m/d H:i:s', strtotime($request->identity_date));
                 $identity->address = $request->identity_address;
 
                 if ($request->hasFile('image_before')) {

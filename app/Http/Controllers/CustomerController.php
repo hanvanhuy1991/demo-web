@@ -55,8 +55,8 @@ class CustomerController extends Controller
             $user->parent_id = Auth::user()->id;
             $user->bank_id = $request->bank;
             $user->area_id = $request->area;
-            $user->birthday = $request->birthday;
-            dd($request->birthday);
+            $date = strtotime($request->birthday);
+            $user->birthday = date('Y/m/d H:i:s', $date);
             $user->address = $request->address;
             $user->phone = $request->phone;
             $user->bank_number = $request->bank_number;
@@ -69,11 +69,10 @@ class CustomerController extends Controller
 
             if ($user->save())
             {
-                dd($user->id);
                 $identity = new Identity();
                 $identity->user_id = $user->id;
                 $identity->number = $request->identity_number;
-                $identity->date = $request->identity_date;
+                $identity->date = date('Y/m/d H:i:s', strtotime($request->identity_date));
                 $identity->address = $request->identity_address;
 
                 if ($request->hasFile('image_before')) {
@@ -82,6 +81,13 @@ class CustomerController extends Controller
                 if ($request->hasFile('image_after')) {
                     $identity->image_after = $request->file('image_after')->store('upload', 'public');
                 }
+
+                $identity->save();
+
+                return redirect()->route('customer.register');
+            }
+            else {
+                return back()->with('error', 'Đã có lỗi xin vui lòng thử lại sau');
             }
         }
 

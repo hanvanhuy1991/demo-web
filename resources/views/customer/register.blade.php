@@ -24,7 +24,11 @@
                                     <div class="form-control__static">
                                         <input type="text" class="form-control form-control__static-text" name="email">
                                     </div>
+                                    @error('email')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
+
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-5">Mật Khẩu</label>
@@ -33,6 +37,9 @@
                                         <input type="password" class="form-control form-control__static-text"
                                                name="password">
                                     </div>
+                                    @error('password')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -41,6 +48,9 @@
                                     <div class="form-control__static">
                                         <input type="text" class="form-control form-control__static-text" name="name">
                                     </div>
+                                    @error('name')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -48,8 +58,11 @@
                                 <div class="col-md-7">
                                     <div class="form-control__static">
                                         <input type="text" class="form-control form-control__static-text"
-                                               name="identity_date">
+                                               name="identity_date" placeholder="01/02/2000">
                                     </div>
+                                    @error('identity_date')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -59,6 +72,9 @@
                                         <input type="file" class="form-control form-control__static-text"
                                                name="image_before">
                                     </div>
+                                    @error('image_before')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -69,6 +85,9 @@
                                             <option value="1">ádfsdfasdf</option>
                                         </select>
                                     </div>
+                                    @error('area')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -76,8 +95,11 @@
                                 <div class="col-md-7">
                                     <div class="form-control__static">
                                         <input type="tex" class="form-control form-control__static-text"
-                                               name="birthday">
+                                               name="birthday" placeholder="01/02/2000">
                                     </div>
+                                    @error('birthday')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -92,6 +114,9 @@
                                                 @endforeach
                                         </select>
                                     </div>
+                                    @error('bank')
+                                        <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -99,10 +124,14 @@
                                 <label class="col-form-label col-md-5">Chủ thẻ</label>
                                 <div class="col-md-7">
                                     <div class="form-control__static">
-                                        <input type="tex" class="form-control form-control__static-text"
+                                        <input type="text" class="form-control form-control__static-text"
                                                name="master_name">
                                     </div>
+                                    @error('master_name')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
+
                             </div>
                         </div>
                         <div class=" col-md-6">
@@ -113,6 +142,7 @@
                                         <input class="form-control form-control__static-text" type="text"
                                                value="{{ Auth::user()->name }}" readonly>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -122,15 +152,21 @@
                                         <input type="password" class="form-control form-control__static-text"
                                                name="password_confirmation">
                                     </div>
+                                    @error('password_confirmation')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-form-label col-md-5">Số chứng minh nhân dân</label>
+                                <label class="col-form-label col-md-5">Số CMT</label>
                                 <div class="col-md-7">
                                     <div class="form-control__static">
                                         <input type="text" class="form-control form-control__static-text"
                                                name="identity_number">
                                     </div>
+                                    @error('identity_number')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -140,6 +176,9 @@
                                         <input type="text" class="form-control form-control__static-text"
                                                name="identity_address">
                                     </div>
+                                    @error('identity_address')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -149,6 +188,9 @@
                                         <input type="file" class="form-control form-control__static-text"
                                                name="image_after">
                                     </div>
+                                    @error('image_after')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -158,6 +200,9 @@
                                         <input type="text" class="form-control form-control__static-text"
                                                name="address">
                                     </div>
+                                    @error('address')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -166,6 +211,9 @@
                                     <div class="form-control__static">
                                         <input type="text" class="form-control form-control__static-text" name="phone">
                                     </div>
+                                    @error('phone')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -175,6 +223,9 @@
                                         <input type="text" class="form-control form-control__static-text"
                                                name="bank_number">
                                     </div>
+                                    @error('bank_number')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -184,6 +235,9 @@
                                         <input type="text" class="form-control form-control__static-text"
                                                name="brand_name">
                                     </div>
+                                    @error('brand_name')
+                                    <span style="color: red">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -192,6 +246,9 @@
                                 <img style="max-width: 100px" src="" alt="Avatar">
                             </div>
                             <input name="image" type="file">
+                            @error('image')
+                            <span style="color: red">{{ $message }}</span>
+                            @enderror
                         </div>
                 </div>
                 </div>
